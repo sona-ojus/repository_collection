@@ -4,7 +4,7 @@ class RepoInfo extends React.Component {
     render(){
         return(
             <div>
-                <a href={this.props.info.url}>{this.props.info.name}</a>
+                <a href={this.props.info.html_url}>{this.props.info.name}</a>
                 <div>{this.props.info.description}</div>
                 <div>{this.props.info.updated_at}</div>  
                 <hr />                          
