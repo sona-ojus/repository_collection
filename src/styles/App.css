@@ -1,0 +1,15 @@
+.left-container{
+    width: 20%;
+    display: inline-block;
+}
+
+.right-container{
+    position: absolute;
+    width: 80%;
+    display: inline-block;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
