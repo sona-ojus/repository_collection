@@ -15,34 +15,35 @@ class RightComponent extends React.Component {
 
     render(){
         return(
-            <div className="right-container">
-                <div className="topnav">
-                    <a href="#home">Overview</a>
-                    <a className="active" href="#news">Repository</a>
-                    <a href="#contact">Stars</a>
-                    <a href="#about">Followers</a>
-                    <a href="#about">Following</a>
-                </div>
-
-                <input type="text" onChange={this.searchAction}/>
-                <select>
-                    <option>Type</option>
-                </select>
-                <select>
-                    <option>Language</option>
-                </select>
-                <button>New</button>
-
-                <UserConsumer>
+            <UserConsumer>
                     {
                         (data)=>{
-                                return data.state.repo_info.map(info => 
-                                     <RepoInfo info={info} />
+                            return(
+                                <div className="right-container">                
+                                    <div className="topnav">
+                                        <a href="#home">Overview</a>
+                                        <a className="active" href="#news">Repository</a>
+                                        <a href="#contact">Stars</a>
+                                        <a href="#about">Followers</a>
+                                        <a href="#about">Following</a>
+                                    </div>
+
+                                    <input type="text" onChange={data.getLanguage}/>
+                                    <select>
+                                        <option>Type</option>
+                                    </select>
+                                    <select>
+                                        <option>Language</option>
+                                    </select>
+                                    <button>New</button>
+
+                                    { data.state.repo_info.map(info => <RepoInfo info={info} /> )}
+                                        
+                                    </div>   
                             )
                         }
                     }
-                </UserConsumer>
-            </div>
+                </UserConsumer>            
         )
     }
 }
