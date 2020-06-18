@@ -4,15 +4,6 @@ import { UserConsumer } from './ContextProvider'
 import RepoInfo from './RepoInfo'
 
 class RightComponent extends React.Component {
-    constructor(props){
-        super(props);
-        console.log(props);
-    }
-
-    searchAction = () => {
-        
-    }
-
     render(){
         return(
             <UserConsumer>
@@ -21,19 +12,24 @@ class RightComponent extends React.Component {
                             return(
                                 <div className="right-container">                
                                     <div className="topnav">
-                                        <a href="#home">Overview</a>
-                                        <a className="active" href="#news">Repository</a>
-                                        <a href="#contact">Stars</a>
-                                        <a href="#about">Followers</a>
-                                        <a href="#about">Following</a>
+                                        <a href="#Overview">Overview</a>
+                                        <a className="active" href="">Repository</a>
+                                        <a href="#Stars">Stars</a>
+                                        <a href="#Followers">Followers</a>
+                                        <a href="#Following">Following</a>
                                     </div>
 
-                                    <input type="text" onChange={data.getLanguage}/>
+                                    <input type="text" onChange={data.getSearchResults}/>
                                     <select>
                                         <option>Type</option>
                                     </select>
-                                    <select>
-                                        <option>Language</option>
+                                    <select onChange={data.getLanguageResults}>
+                                    <option>Select Language</option>
+                                    { data.state.languages.map(lang => {
+                                            if(lang !== undefined)
+                                                return <option>{lang}</option>
+                                        })    
+                                    }                                    
                                     </select>
                                     <button>New</button>
 

@@ -2,10 +2,6 @@ import React from '../../node_modules/react'
 import { UserConsumer } from './ContextProvider'
 
 class LeftComponent extends React.Component {
-    constructor(props){
-        super(props);
-    }  
-
     render(){
         return(
             <div className="left-container">

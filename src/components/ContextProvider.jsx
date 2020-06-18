@@ -8,7 +8,8 @@ export class ContextProvider extends React.Component{
         this.state = {
             user_info:{},
             repo_info:[],
-            original_repo:[]
+            original_repo:[],
+            languages: []
         };
     }
 
@@ -19,10 +20,14 @@ export class ContextProvider extends React.Component{
 
         fetch('https://api.github.com/users/supreetsingh247/repos')
         .then(response => response.json())
-        .then(data => this.setState({repo_info : data, original_repo: data}));
+        .then(data => 
+            {
+                this.setState({repo_info : data, original_repo: data})
+                this.getLanguages();
+            });
     }
 
-    getLanguage = (e) => {
+    getSearchResults = (e) => {
         var repo = this.state.original_repo.filter(info => {
             var xSub = info.name.substring(0, 3).toLowerCase()
             return info.name.toLowerCase().includes(e.target.value) || this.checkName(xSub, e.target.value)
@@ -38,12 +43,29 @@ export class ContextProvider extends React.Component{
         return name.match(regex);
     }
 
+    getLanguages = () =>{
+        var languages = this.state.original_repo.map(info => {
+            if(info.language !== null) return info.language
+        });
+        const set =  new Set(languages); 
+        var lang = Array.from(set);
+        this.setState({languages: lang});
+    }
+
+    getLanguageResults = (e) => {
+        var repo = this.state.original_repo.filter(info => {           
+            return info.language === e.target.value
+        })
+        this.setState({repo_info: repo});
+    }
+
     render(){
         return(
             <div>
                 <MyContext.Provider value={{
                     state: this.state,
-                    getLanguage: this.getLanguage
+                    getSearchResults: this.getSearchResults,
+                    getLanguageResults: this.getLanguageResults
                 }}>
                     {this.props.children}
                 </MyContext.Provider>

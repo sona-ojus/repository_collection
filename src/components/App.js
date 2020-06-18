@@ -5,10 +5,6 @@ import LeftComponent from './LeftComponent'
 import RightComponent from './RightComponent';
 
 class App extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return(
             <>
